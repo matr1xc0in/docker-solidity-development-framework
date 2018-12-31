@@ -2,10 +2,14 @@ FROM blcksync/go11-node:latest as builder
 
 LABEL maintainer="alee-blocksync"
 
+ENV SHELL=/bin/bash \
+    GOPATH=/go
+
 COPY package.json /go/package.json
 COPY package-lock.json /go/package-lock.json
 
-RUN cd /go/; apk update && apk upgrade && \
+RUN mkdir -p /go/bin; cd /go; \
+    apk update && apk upgrade && \
     apk add --no-cache bash git \
     busybox-extras \
     python \
@@ -31,6 +35,9 @@ FROM blcksync/go11-node:latest
 
 LABEL maintainer="alee-blocksync"
 
+ENV SHELL=/bin/bash \
+    GOPATH=/go
+
 USER root
 WORKDIR /root
 
@@ -40,10 +47,10 @@ RUN apk update && apk upgrade && \
     echo "export PATH=/usr/local/go/bin:\$GOPATH/bin:\$PATH:\$HOME/bin" > /etc/profile.d/go_path.sh
 
 COPY --from=builder /usr/local/go/bin/* /usr/local/go/bin/
-COPY --from=builder /go/bin/* /go/bin/
 COPY --from=builder /usr/lib/node_modules /usr/lib/
-COPY --from=builder /root/.npm /root/
-COPY --from=builder /root/.node-gyp /root/
+COPY --from=builder /root/.npm /root/.npm
+COPY --from=builder /root/.node-gyp /root/.node-gyp
 COPY --from=builder /root/.config /root/
 COPY --from=builder /go/* /go/
 
+CMD ["bash"]
