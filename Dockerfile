@@ -1,4 +1,4 @@
-FROM blcksync/go11-node:latest
+FROM blcksync/go11-node:latest as builder
 
 LABEL maintainer="alee-blocksync"
 
@@ -26,3 +26,24 @@ RUN cd /go/; apk update && apk upgrade && \
     npm install -g node-gyp@3.8.0 && npm install --python=/usr/bin/python && \
     npm install -g truffle@4.1.15 solc@0.4.25 truffle-hdwallet-provider@0.0.6 js-sha256@0.9.0 bignumber@1.1.0 crypto-js@3.1.9-1; \
     mkdir /go/deploy
+
+FROM blcksync/go11-node:latest
+
+LABEL maintainer="alee-blocksync"
+
+USER root
+WORKDIR /root
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache ca-certificates bash git busybox-extras && \
+    rm -rf /var/cache/apk/* && \
+    echo "export PATH=/usr/local/go/bin:\$GOPATH/bin:\$PATH:\$HOME/bin" > /etc/profile.d/go_path.sh
+
+COPY --from=builder /usr/local/go/bin/* /usr/local/go/bin/
+COPY --from=builder /go/bin/* /go/bin/
+COPY --from=builder /usr/lib/node_modules /usr/lib/
+COPY --from=builder /root/.npm /root/
+COPY --from=builder /root/.node-gyp /root/
+COPY --from=builder /root/.config /root/
+COPY --from=builder /go/* /go/
+
