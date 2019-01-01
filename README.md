@@ -15,7 +15,7 @@ and make it easy for anyone to use as our goal.
 
 **A local directory ./deploy will be created and mounted into your docker container**.
 This preserves the work you create in the container so it doesn't get deleted/wiped out when
-you exist the container. Make sure you are working under the `/go/deploy` directory.
+you exist the container. Make sure you are working under the `/root/deploy` directory.
 
 After you run it, a command prompt will show up, now, you can simply run the `truffle` command
 as you like, e.g.
