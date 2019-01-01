@@ -29,21 +29,7 @@ RUN cd /root; \
     npm install -g node-gyp@3.8.0 && npm install --python=/usr/bin/python && \
     npm install -g truffle@4.1.15 solc@0.4.25 truffle-hdwallet-provider@0.0.6 js-sha256@0.9.0 bignumber@1.1.0 crypto-js@3.1.9-1;
 
-FROM blcksync/alpine-node:latest
-
-LABEL maintainer="alee-blocksync"
-
-ENV SHELL=/bin/bash
-
 USER root
 WORKDIR /root
-
-RUN apk update && apk upgrade && \
-    apk add --no-cache ca-certificates bash git busybox-extras && \
-    rm -rf /var/cache/apk/* ; mkdir -p /root/deploy
-
-COPY --from=builder /root/.npm /root/.npm
-COPY --from=builder /root/.node-gyp /root/.node-gyp
-COPY --from=builder /root/.config /root/
 
 CMD ["bash"]
