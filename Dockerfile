@@ -5,7 +5,7 @@ LABEL maintainer="alee-blocksync"
 ENV SHELL=/bin/bash
 
 COPY package.json /root/package.json
-COPY package-lock.json /root/package-lock.json
+# COPY package-lock.json /root/package-lock.json
 
 RUN cd /root; \
     apk update && apk upgrade && \
@@ -26,8 +26,8 @@ RUN cd /root; \
     && if [[ ! -e /usr/bin/python ]];        then ln -sf /usr/bin/python2.7 /usr/bin/python; fi \
     && if [[ ! -e /usr/bin/python-config ]]; then ln -sf /usr/bin/python2.7-config /usr/bin/python-config; fi \
     && if [[ ! -e /usr/bin/easy_install ]];  then ln -sf /usr/bin/easy_install-2.7 /usr/bin/easy_install; fi ; \
-    npm install -g node-gyp@4.0.0 && npm install --python=/usr/bin/python && \
-    npm install -g truffle@5.0.19 solc@0.5.8 truffle-hdwallet-provider@1.0.9 js-sha256@0.9.0 bignumber@1.1.0 crypto-js@3.1.9-1;
+    npm install -g node-gyp@6.0.0 && npm install --python=/usr/bin/python && \
+    npm install -g truffle@5.1.19 solc@0.5.17 @truffle/hdwallet-provider@1.0.33 js-sha256@0.9.0 bignumber@1.1.0 crypto-js@3.3.0 web3@1.2.6 core-js@3;
 
 USER root
 WORKDIR /root

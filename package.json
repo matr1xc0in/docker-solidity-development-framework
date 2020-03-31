@@ -1,6 +1,7 @@
 {
   "name": "docker-solidity-development-framework",
   "version": "0.0.1",
+  "license": "MIT",
   "description": "A pre-packaged npm modules for truffle framework for Solidity development",
   "main": "index.js",
   "scripts": {
@@ -18,11 +19,12 @@
   "homepage": "https://github.com/matr1xc0in/docker-solidity-development-framework#readme",
   "dependencies": {
     "bignumber": "^1.1.0",
-    "crypto-js": "^3.1.9-1",
+    "crypto-js": "^3.3.0",
     "js-sha256": "^0.9.0",
-    "node-gyp": "^4.0.0",
-    "solc": "^0.5.8",
-    "truffle": "^5.0.19",
-    "truffle-hdwallet-provider": "1.0.9"
+    "node-gyp": "^6.0.0",
+    "solc": "^0.5.17",
+    "truffle": "^5.1.19",
+    "@truffle/hdwallet-provider": "1.0.33",
+    "web3": "^1.2.6"
   }
 }
