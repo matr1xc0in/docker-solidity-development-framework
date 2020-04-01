@@ -5,7 +5,7 @@ LABEL maintainer="alee-blocksync"
 ENV SHELL=/bin/bash
 
 COPY package.json /root/package.json
-# COPY package-lock.json /root/package-lock.json
+COPY package-lock.json /root/package-lock.json
 
 RUN cd /root; \
     apk update && apk upgrade && \
