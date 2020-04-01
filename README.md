@@ -6,8 +6,9 @@ and make it easy for anyone to use as our goal. IT comes with the following tool
 
 - solc 0.5.x
 - truffle 5.0.x
-- node 8.16.0
-- npm 6.9.0
+- node 12.16.0
+- npm 6.11.0
+- web3 1.2.6
 
 ## To build your docker image
 
