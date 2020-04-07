@@ -1,4 +1,4 @@
-FROM blcksync/alpine-node:latest as builder
+FROM blcksync/alpine-node:310 as builder
 
 LABEL maintainer="alee-blocksync"
 
